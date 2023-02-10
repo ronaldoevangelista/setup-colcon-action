@@ -1,0 +1,10 @@
+---
+name: colcon pytest
+description: Continuous integration for colcon repositories
+runs:
+  using: composite
+  steps:
+    - shell: bash
+      run: |
+        echo ::group::Initialize environment
+        echo ::endgroup::
