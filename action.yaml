@@ -5,6 +5,15 @@ runs:
   using: composite
   steps:
     - shell: bash
+      name: Build and test
       run: |
         echo ::group::Initialize environment
+        source /opt/ros/${{ matrix.distro }}/setup.bash
+        COLCON=$(whereis colcon | grep ":" | awk '{ split($13,a,"/"); print $2 }')
+        echo $COLCON
+        echo ::endgroup::
+        echo ::group::Install dependencies
+        cd ..
+        python $COLCON build --paths ${{github.workspace}} --event-handlers console_direct+
+        python $COLCON test --paths ${{github.workspace}} --return-code-on-test-failure --event-handlers console_direct+
         echo ::endgroup::
