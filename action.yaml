@@ -10,7 +10,6 @@ runs:
         echo ::group::Initialize environment
         source /opt/ros/${{ matrix.distro }}/setup.bash
         COLCON=$(whereis colcon | grep ":" | awk '{ split($13,a,"/"); print $2 }')
-        echo $COLCON
         echo ::endgroup::
         echo ::group::Install dependencies
         cd ..
